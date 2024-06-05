@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EBEES BOOK STORE</title>
+  <style>
+    /* Global Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9; /* Light gray background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column; /* Allow column direction to accommodate footer */
+      min-height: 100vh;
+    }
+
+    /* Blue Rectangle */
+    .blue-rectangle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: pink; /* Soft blue color */
+      z-index: -1;
+      border-radius: 20px;
+      transform: skewY(-5deg); /* Add a slight skew effect */
+      opacity: 0.8; /* Add a slight transparency effect */
+    }
+
+    /* Header Section */
+    .hero_area {
+      width: 100%;
+      background-color: #fff;
+    }
+    .header_section {
+      width: 100%;
+      background-color: #ec357b; /* Soft blue color for header */
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add shadow to the header */
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
+    .navbar-brand span {
+      font-size: 24px;
+      color: #fff; /* White text for brand name */
+      font-weight: bold;
+    }
+    .navbar-toggler {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+    }
+    .navbar-nav {
+      list-style: none;
+      display: flex;
+      align-items: center;
+    }
+    .navbar-nav .nav-item {
+      margin-left: 20px;
+    }
+    .navbar-nav .nav-link {
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 12px;
+      transition: background-color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+      background-color: #345495; /* Darker blue on hover and active */
+      border-radius: 5px;
+    }
+    .user_option {
+      display: flex;
+      align-items: center;
+    }
+    .user_option a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 15px;
+      display: flex;
+      align-items: center;
+      transition: color 0.3s ease;
+    }
+    .user_option a:hover {
+      color: #ffea00; /* Yellow color on hover */
+    }
+    .user_option i {
+      margin-right: 5px;
+    }
+    .nav_search-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 18px;
+      margin-left: 15px;
+      transition: color 0.3s ease;
+    }
+    .nav_search-btn:hover {
+      color: #ffea00; /* Yellow color on hover */
+    }
+
+    /* Cart Container */
+    .cart-container {
+      width: 80%;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transform: translateY(20px); /* Add a slight translate effect */
+      transition: transform 0.3s ease-in-out; /* Add a transition effect */
+      position: relative; /* Ensure that the z-index works properly */
+    }
+    .cart-container:hover {
+      transform: translateY(0); /* On hover, translate back to original position */
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Add a stronger box shadow effect on hover */
+    }
+
+    /* Cart Item */
+    .cart-item {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid #ccc;
+      transition: background-color 0.3s ease-in-out; /* Add a transition effect */
+    }
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+    .cart-item:hover {
+      background-color: #f7f7f7; /* On hover, change background color */
+    }
+    .cart-item img {
+      max-width: 100px;
+      margin-right: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a box shadow effect */
+    }
+    .cart-item h2 {
+      margin-top: 0;
+      font-size: 18px; /* Increase font size */
+      color: #333; /* Darken font color */
+      font-weight: bold; /* Make font bold */
+    }
+    .cart-item p {
+      margin-bottom: 5px;
+      font-size: 14px; /* Decrease font size */
+      color: #666; /* Lighten font color */
+    }
+
+    /* Checkout Form */
+    .checkout-form {
+      padding: 20px;
+    }
+    .checkout-form h2 {
+      margin-top: 0;
+      margin-bottom: 15px; /* Add space below the heading */
+      font-size: 20px; /* Increase font size */
+      color: #333; /* Darken font color */
+      font-weight: bold; /* Make font bold */
+    }
+    .checkout-form label {
+      display: block;
+      margin-bottom: 10px;
+      color: #555; /* Slightly darken label color */
+    }
+    .checkout-form input[type="text"],
+    .checkout-form select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      transition: border-color 0.3s ease-in-out; /* Add a transition effect */
+    }
+    .checkout-form input[type="text"]:focus,
+    .checkout-form select:focus {
+      border-color: #4CAF50; /* On focus, change border color */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a box shadow effect on focus */
+    }
+    .checkout-form input[type="submit"] {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out; /* Add a transition effect */
+    }
+    .checkout-form input[type="submit"]:hover {
+      background-color: #45a049; /* On hover, change background color */
+    }
+
+    /* Footer Styles */
+    footer {
+      margin-top: 20px;
+      text-align: center;
+      color: #666; /* Lighten font color */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="blue-rectangle"></div>
+  <div class="hero_area"> 
+    <!-- header section starts -->
+    <header class="header_section">
+      <nav class="navbar navbar-expand-lg custom_nav-container ">
+        <a class="navbar-brand" href="index.html">
+          <span>
+            EBEES BOOK STORE
+          </span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class=""></span>
+        </button>
+        <div class="collapse navbar-collapse innerpage_navbar" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="shop.html">Shop</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="why.html">Why Us</a>
+            </li>
+           
+            <li class="nav-item active">
+              <a class="nav-link" href="contact.html">Contact Us</a>
+            </li>
+          </ul>
+          <div class="user_option">
+            <a href="login.html">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <span>
+                (Login)
+              </span>
+            </a>
+            <div class="user_option">
+              <a href="sign up.html">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <span>
+                  (sign up)
+                </span>
+              </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- end header section -->
+  </div>
+  <!-- end hero area -->
+
+  <div class="cart-container">
+    <h1 style="text-align: center; margin-bottom: 20px;">EBEES BOOK STORE</h1>
+    <div class="cart-item">
+      <img src="images/p5.png" alt="Product Image">
+      <div>
+        <h2>The Book Thief</h2>
+        <p>This book delivery in 2 weeks</p>
+        <p>Price: 2700/-</p>
+      </div>
+    </div>
+    
+    <!-- Add more cart items if needed -->
+    <div class="checkout-form">
+      <h2>Checkout</h2>
+      <form action="checkout.php" method="post">
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+        <label for="mobile">Mobile Number:</label>
+        <input type="text" id="mobile" name="mobile" required>
+        <label for="payment">Payment Method:</label>
+        <select id="payment" name="payment" required>
+          <option value="cash_on_delivery">Cash on Delivery</option>
+          <option value="bank_transfer">Bank Transfer</option>
+        </select>
+        <input type="submit" value="Place Order">
+      </form>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; EBEES BOOK STORE. All rights reserved.</p>
+  </footer>
+</body>
+</html>
